@@ -1,157 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <title>Bubu Rani 💖 Dudu Raja</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg,#ff2f6f,#ff9aa2);
-  overflow-x: hidden;
-  color: white;
-  text-align: center;
+body{
+ margin:0;
+ font-family:Segoe UI,sans-serif;
+ background:linear-gradient(135deg,#ff1e56,#ff9aa2);
+ color:white;
+ text-align:center;
+ overflow-x:hidden;
 }
 
-.container {
-  padding: 40px 20px;
-  max-width: 900px;
-  margin: auto;
+/* PASSWORD SCREEN */
+#lockScreen{
+ position:fixed;
+ inset:0;
+ background:#ff1e56;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex-direction:column;
+ z-index:999;
 }
 
-h1 {
-  font-size: 3rem;
+input{
+ padding:12px;
+ border:none;
+ border-radius:20px;
+ width:200px;
+ text-align:center;
+ font-size:18px;
 }
 
-p {
-  font-size: 1.25rem;
-  line-height: 1.8;
+button{
+ background:white;
+ color:#ff1e56;
+ border:none;
+ padding:12px 30px;
+ border-radius:30px;
+ font-size:18px;
+ cursor:pointer;
+ margin-top:10px;
 }
 
-.card {
-  background: rgba(255,255,255,0.18);
-  border-radius: 22px;
-  padding: 30px;
-  margin: 25px 0;
-  backdrop-filter: blur(8px);
+.container{padding:40px 20px;max-width:900px;margin:auto;}
+
+h1{font-size:3rem;}
+
+.card{
+ background:rgba(255,255,255,0.2);
+ border-radius:25px;
+ padding:30px;
+ margin:25px 0;
 }
 
-button {
-  background: white;
-  color: #ff2f6f;
-  border: none;
-  padding: 15px 35px;
-  border-radius: 30px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: 0.3s;
-  margin: 10px;
+/* Hearts */
+.heart{
+ position:fixed;
+ bottom:-20px;
+ animation:float 6s linear infinite;
+ pointer-events:none;
 }
 
-button:hover {
-  transform: scale(1.1);
+@keyframes float{
+ to{transform:translateY(-110vh);opacity:0;}
 }
 
-.photos img {
-  width: 180px;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 16px;
-  margin: 10px;
+/* CONFETTI */
+.confetti{
+ position:fixed;
+ top:-10px;
+ font-size:20px;
+ animation:fall 4s linear forwards;
+}
+@keyframes fall{
+ to{transform:translateY(110vh) rotate(360deg);}
 }
 
-#answer {
-  display: none;
-  font-size: 2.2rem;
-  margin-top: 20px;
-  animation: pop 0.6s ease;
+img.mainPhoto{
+ width:260px;
+ border-radius:20px;
+ margin:15px;
 }
 
-@keyframes pop {
-  from {transform: scale(0.5); opacity:0;}
-  to {transform: scale(1); opacity:1;}
-}
-
-/* Floating hearts */
-.heart {
-  position: fixed;
-  bottom: -20px;
-  animation: floatUp 6s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes floatUp {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-110vh); opacity: 0; }
-}
 </style>
 </head>
 
 <body>
 
-<!-- Add your romantic song link below -->
+<!-- PASSWORD SCREEN -->
+<div id="lockScreen">
+ <h2>Only for BUBU RANI 😏❤️</h2>
+ <p>Password hint: your nickname 😉</p>
+ <input id="pass" placeholder="Enter password">
+ <button onclick="unlock()">Enter 💘</button>
+</div>
+
+<!-- MUSIC -->
 <audio autoplay loop>
-  <source src="PASTE_SONG_LINK_HERE.mp3" type="audio/mpeg">
+ <source src="PASTE_SONG_LINK.mp3">
 </audio>
 
 <div class="container">
 
-  <h1>BUBU RANI ❤️</h1>
+<h1 id="type"></h1>
 
-  <div class="card">
-    <p>
-      From the moment you walked into my life, everything started shining brighter ✨  
-      Your smile is my favorite view. Your voice is my favorite song.  
-      And your love… is my forever.
-      <br><br>
-      Today, tomorrow, and for every lifetime after this —
-    </p>
+<div class="card">
+ <h2>Countdown till LOVE 💕</h2>
+ <div id="timer"></div>
+</div>
 
-    <h2>Will you be my Valentine? 💘</h2>
+<div class="card">
+ <p id="tease"></p>
 
-    <button onclick="sayYes()">YES 💖</button>
-    <button onclick="moveButton(this)">NO 🙈</button>
+ <h2>Will you be my Valentine? 💘</h2>
 
-    <div id="answer">
-      YAYYYY 😍💞 I LOVE YOU FOREVER ♾️❤️  
-      <br>— DUDU RAJA
-    </div>
-  </div>
+ <button onclick="sayYes()">YES 💖</button>
+ <button onclick="moveBtn(this)">NO 🙈</button>
 
-  <div class="card photos">
-    <h2>Our Memories 📸</h2>
-    <img src="PHOTO1.jpg">
-    <img src="PHOTO2.jpg">
-    <img src="PHOTO3.jpg">
-  </div>
+ <div id="answer" style="display:none;font-size:2rem;">
+   YAYYYY 😍🔥 BUBU RANI IS MINE FOREVER ♾️❤️  
+   <br>— DUDU RAJA
+ </div>
+</div>
+
+<div class="card">
+ <h2>Our Crazy Moments 😜</h2>
+
+ <!-- ADD YOUR IMAGE -->
+ <img src="OUR_PHOTO.jpg" class="mainPhoto">
+
+ <!-- GIFS -->
+ <img src="https://media.giphy.com/media/l0MYEqEzwMWFCg8rm/giphy.gif" width="180">
+ <img src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif" width="180">
+</div>
 
 </div>
 
 <script>
+
+/* PASSWORD */
+function unlock(){
+ if(pass.value.toLowerCase()=="bubu"){
+   document.getElementById("lockScreen").style.display="none";
+ } else alert("Wrong 😏 try again!");
+}
+
+/* TYPE EFFECT */
+let name="BUBU RANI ❤️";
+let i=0;
+setInterval(()=>{
+ if(i<name.length){
+  document.getElementById("type").innerHTML+=name[i++];
+ }
+},120);
+
+/* TEASING LINES */
+const lines=[
+ "You smile too much… illegal levels of cute 😤❤️",
+ "Stop being this pretty please 😡💘",
+ "Why are you my whole personality now?",
+ "I was normal before you came 🙄😂",
+ "BUBU RANI supremacy 👑🔥"
+];
+setInterval(()=>{
+ tease.innerHTML=lines[Math.floor(Math.random()*lines.length)];
+},3000);
+
+/* COUNTDOWN */
+let target=new Date("Feb 14, 2026 00:00:00").getTime();
+setInterval(()=>{
+ let now=new Date().getTime();
+ let d=target-now;
+ timer.innerHTML=
+ Math.floor(d/86400000)+" Days "+
+ Math.floor(d%86400000/3600000)+" Hrs "+
+ Math.floor(d%3600000/60000)+" Min ";
+},1000);
+
+/* NO BUTTON ESCAPE */
+function moveBtn(b){
+ b.style.position="absolute";
+ b.style.left=Math.random()*80+"%";
+ b.style.top=Math.random()*80+"%";
+}
+
+/* YES CONFETTI */
 function sayYes(){
-  document.getElementById("answer").style.display = "block";
+ answer.style.display="block";
+ for(let i=0;i<80;i++){
+  let c=document.createElement("div");
+  c.className="confetti";
+  c.innerHTML=["🎉","💖","✨","🔥"][Math.floor(Math.random()*4)];
+  c.style.left=Math.random()*100+"vw";
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),4000);
+ }
 }
 
-/* NO button escapes 😆 */
-function moveButton(btn){
-  btn.style.position = "absolute";
-  btn.style.left = Math.random()*80 + "%";
-  btn.style.top = Math.random()*80 + "%";
-}
+/* HEARTS */
+setInterval(()=>{
+ let h=document.createElement("div");
+ h.className="heart";
+ h.innerHTML="❤️";
+ h.style.left=Math.random()*100+"vw";
+ h.style.fontSize=Math.random()*25+20+"px";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),6000);
+},400);
 
-/* Floating hearts generator */
-setInterval(() => {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random()*100 + "vw";
-  heart.style.fontSize = Math.random()*25 + 20 + "px";
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 6000);
-}, 400);
 </script>
 
 </body>
