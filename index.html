@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Bubu Rani 💖 Dudu Raja</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#ff2f6f,#ff9aa2);
+  overflow-x: hidden;
+  color: white;
+  text-align: center;
+}
+
+.container {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+p {
+  font-size: 1.25rem;
+  line-height: 1.8;
+}
+
+.card {
+  background: rgba(255,255,255,0.18);
+  border-radius: 22px;
+  padding: 30px;
+  margin: 25px 0;
+  backdrop-filter: blur(8px);
+}
+
+button {
+  background: white;
+  color: #ff2f6f;
+  border: none;
+  padding: 15px 35px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 10px;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+.photos img {
+  width: 180px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin: 10px;
+}
+
+#answer {
+  display: none;
+  font-size: 2.2rem;
+  margin-top: 20px;
+  animation: pop 0.6s ease;
+}
+
+@keyframes pop {
+  from {transform: scale(0.5); opacity:0;}
+  to {transform: scale(1); opacity:1;}
+}
+
+/* Floating hearts */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  animation: floatUp 6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Add your romantic song link below -->
+<audio autoplay loop>
+  <source src="PASTE_SONG_LINK_HERE.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+  <h1>BUBU RANI ❤️</h1>
+
+  <div class="card">
+    <p>
+      From the moment you walked into my life, everything started shining brighter ✨  
+      Your smile is my favorite view. Your voice is my favorite song.  
+      And your love… is my forever.
+      <br><br>
+      Today, tomorrow, and for every lifetime after this —
+    </p>
+
+    <h2>Will you be my Valentine? 💘</h2>
+
+    <button onclick="sayYes()">YES 💖</button>
+    <button onclick="moveButton(this)">NO 🙈</button>
+
+    <div id="answer">
+      YAYYYY 😍💞 I LOVE YOU FOREVER ♾️❤️  
+      <br>— DUDU RAJA
+    </div>
+  </div>
+
+  <div class="card photos">
+    <h2>Our Memories 📸</h2>
+    <img src="PHOTO1.jpg">
+    <img src="PHOTO2.jpg">
+    <img src="PHOTO3.jpg">
+  </div>
+
+</div>
+
+<script>
+function sayYes(){
+  document.getElementById("answer").style.display = "block";
+}
+
+/* NO button escapes 😆 */
+function moveButton(btn){
+  btn.style.position = "absolute";
+  btn.style.left = Math.random()*80 + "%";
+  btn.style.top = Math.random()*80 + "%";
+}
+
+/* Floating hearts generator */
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = Math.random()*25 + 20 + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}, 400);
+</script>
+
+</body>
+</html>
